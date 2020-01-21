@@ -1,0 +1,117 @@
+#!/bin/sh
+
+# git-mirror - a tool for mirroring a remote git repository to another one.
+# Copyright (C) 2020 Jan Baudisch
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+help() {
+    echo "git-mirror"
+    echo ""
+    echo "A tool for mirroring a remote git repository to another one."
+    echo ""
+    echo "Usage:"
+    echo "    git-mirror setup [path] [primary] [mirror]"
+    echo "        Sets up a new folder for mirroring a remote git repository."
+    echo "        path - The path where the primary repository should be cloned. Must not exist."
+    echo "        primary - git URL for the primary git repository (the one to be mirrored)."
+    echo "        mirror - git URL for the repository to be mirrored to. Must already exist and be writable from the host."
+    echo ""
+    echo "    git-mirror update [path]"
+    echo "        Updates the mirror repository with the primary. Only works if the given directory was set up with this tool."
+    echo "        path - The directory which was set up using the setup command."
+    echo ""
+    echo "git-mirror Copyright (C) 2020 Jan Baudisch"
+    echo "This program comes with ABSOLUTELY NO WARRANTY."
+    echo "This is free software, and you are welcome to redistribute it under certain conditions; see the license for details."
+}
+
+check_git() {
+    command -v git >/dev/null 2>&1 || {
+        echo >&2 "Could not find git. Please make sure it is installed and included in your path."
+        exit 1
+    }
+}
+
+setup() {
+    path=$1
+    primary=$2
+    mirror=$3
+
+    [ -z "$path" ] && echo >&2 "No path given." && exit 1
+    [ -z "$primary" ] && echo >&2 "No primary repository given." && exit 1
+    [ -z "$mirror" ] && echo >&2 "No mirror repository given." && exit 1
+
+    [ -d "$path" ] && echo >&2 "The given path (${path}) already exists." && exit 1
+
+    check_git
+
+    mkdir -p $path
+
+    echo "Cloning primary ..."
+    git clone --mirror $primary $path
+
+    echo ""
+    echo "Adding mirror remote ..."
+    $(cd $path && git remote add --mirror=fetch mirror $mirror)
+
+    echo ""
+    echo "Mirror directory set up."
+
+    echo ""
+    echo "Running update ..."
+
+    echo ""
+
+    update $1
+}
+
+update() {
+    path=$1
+
+    [ -z "$path" ] && echo >&2 "No path given." && exit 1
+
+    [ ! -d "$path" ] && echo >&2 "The given path (${path}) does not exist." && exit 1
+
+    check_git
+
+    echo "Fetching primary ..."
+    $(cd $path && git fetch origin)
+
+    echo ""
+    echo "Pushing to mirror ..."
+    $(cd $path && git push mirror --all)
+
+    echo ""
+    echo "Mirror up to date."
+}
+
+case "$1" in
+("setup")
+    setup $2 $3 $4
+    ;;
+
+("update")
+    update $2
+    ;;
+
+("help")
+    help
+    ;;
+
+*)
+    help
+    exit 1
+    ;;
+esac

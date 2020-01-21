@@ -1,0 +1,24 @@
+.TH man 1 "21 January 2020" "0.1.0" "git-mirror man page"
+.SH NAME
+git-mirror \- a tool for mirroring a remote git repository to another one
+.SH SYNOPSIS
+.B git-mirror
+setup [path] [primary] [mirror]
+.PP
+Sets up a new folder for mirroring a remote git repository.
+.PP
+.B git-mirror
+update [path]
+.PP
+Updates the mirror repository with the primary. Only works if the given directory was set up with this tool.
+.SH ARGUMENTS
+.B path
+\- path to directory to use for the mirroring
+.PP
+.B primary
+\- git url for the primary repository, the one to be mirrored
+.PP
+.B mirror
+\- git url for the mirror repository, must be writable from the host
+.SH AUTHOR
+Jan Baudisch (dev@baudisch.xyz)
