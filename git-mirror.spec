@@ -15,10 +15,12 @@ git-mirror is a tool for mirroring a remote git repository to another one.
 %prep
 %autosetup
 
+%build
+gzip git-mirror.1
+
 %install
 install -Dpm 755 git-mirror %{buildroot}%{_bindir}/git-mirror
-install -Dpm 644 git-mirror.1 %{_mandir}/man1/git-mirror.1
-gzip %{_mandir}/man1/git-mirror.1
+install -Dpm 644 git-mirror.1.gz %{buildroot}%{_mandir}/man1/git-mirror.1.gz
 
 %files
 %license LICENSE
