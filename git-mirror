@@ -64,7 +64,7 @@ setup() {
 
     echo ""
     echo "Adding mirror remote ..."
-    $(cd $path && git remote add --mirror=fetch mirror $mirror)
+    $(cd $path && git remote add --mirror=fetch mirror $mirror) || exit $?
 
     echo ""
     echo "Mirror directory set up."
@@ -87,11 +87,11 @@ update() {
     check_git
 
     echo "Fetching primary ..."
-    $(cd $path && git fetch origin)
+    $(cd $path && git fetch origin) || exit $?
 
     echo ""
     echo "Pushing to mirror ..."
-    $(cd $path && git push mirror --all)
+    $(cd $path && git push mirror --all) || exit $?
 
     echo ""
     echo "Mirror up to date."
