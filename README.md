@@ -81,4 +81,14 @@ Add a cronjob (e.g. with `crontab -e`) containing the following:
 
 This will update the mirror every 5 minutes.
 
+## In Action
+
+This code mirrors itself to [GitHub][github-url].
+
+## Issues
+
+See the [issue tracker][tracker-url].
+
 [copr-url]: https://copr.fedorainfracloud.org/coprs/janbaudisch/git-mirror
+[github-url]: https://github.com/janbaudisch/git-mirror
+[tracker-url]: https://todo.sr.ht/~janbaudisch/git-mirror
