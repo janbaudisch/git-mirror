@@ -2,6 +2,41 @@
 
 > A tool for mirroring a remote git repository to another one.
 
+## Installation
+
+This tool is just a simple script, so the installation should be straightforward.
+
+### Preqrequisites
+
+ - POSIX shell
+ - git
+
+### From Source
+
+Download the script.
+
+```
+curl -O https://git.sr.ht/~janbaudisch/git-mirror/blob/<version>/git-mirror
+```
+
+(Replace `<version>` with the latest version.)
+
+Make sure the script is executable:
+
+```
+chmod +x git-mirror
+```
+
+Move it to the bindir:
+
+```
+sudo mv git-mirror /usr/bin/git-mirror
+```
+
+### Packages
+
+I maintain a [copr repo][copr-url] for Fedora and EPEL.
+
 ## Usage
 
 For details, see the manual page for `git-mirror(1)` or `git-mirror help`
@@ -45,3 +80,5 @@ Add a cronjob (e.g. with `crontab -e`) containing the following:
 ```
 
 This will update the mirror every 5 minutes.
+
+[copr-url]: https://copr.fedorainfracloud.org/coprs/janbaudisch/git-mirror
