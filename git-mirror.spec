@@ -1,5 +1,5 @@
 Name: git-mirror
-Version: 0.1.2
+Version: 0.2.0
 Release: 1%{?dist}
 Summary: A tool for mirroring a remote git repository to another one
 License: GPL-3.0
