@@ -71,7 +71,7 @@ update() {
 
     echo ""
     echo "Pushing to mirror ..."
-    $(cd $path && git push mirror --tags --all) || exit $?
+    $(cd $path && git push mirror --all --follow-tags) || exit $?
 
     echo ""
     echo "Mirror up to date."
