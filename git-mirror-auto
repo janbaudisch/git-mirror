@@ -1,0 +1,16 @@
+#!/bin/sh
+
+[ ! -z "$1" ] && UPDATE_DIRECTORY="$1"
+
+[ -z "$UPDATE_DIRECTORY" ] && echo >&2 "No update path given." && exit 1
+
+for directory in $(find "$UPDATE_DIRECTORY" -maxdepth 1 -type d)
+do
+    [ "$directory" = "$UPDATE_DIRECTORY" ] && continue
+
+    echo "Updating $directory ..."
+
+    git-mirror update "$directory"
+
+    echo "Updated $directory."
+done

@@ -1,0 +1,8 @@
+[Unit]
+Description=Automatic updater for git-mirror
+Documentation=https://git.sr.ht/~janbaudisch/git-mirror
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/git-mirror/git-mirror-auto.env
+ExecStart=/usr/bin/git-mirror-auto
