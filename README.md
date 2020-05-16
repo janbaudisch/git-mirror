@@ -10,6 +10,7 @@ This tool is just a simple script, so the installation should be straightforward
 
  - POSIX shell
  - git
+ - (optional) Systemd or a cron-daemon
 
 ### From Source
 
@@ -70,7 +71,7 @@ Fetches everything from the primary repository and then pushes it to the mirror.
 git-mirror update path/to/directory
 ```
 
-### `git-mirror-auto` and systemd
+### `git-mirror-auto` and Systemd
 
 The `git-mirror-auto` script takes one directory to batch update all subdirectories using `git-mirror update`.
 The directory to check is provided as a commandline argument or via the `UPDATE_DIRECTORY` environment variable.
