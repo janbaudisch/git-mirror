@@ -39,6 +39,12 @@ Check your systems documentation on how to install Systemd files.
 ### Packages
 
 I maintain a [copr repo][copr-url] for Fedora and CentOS.
+To enable it and install the package run:
+
+```
+sudo dnf copr enable janbaudisch/git-mirror
+sudo dnf install git-mirror
+```
 
 ## Usage
 
