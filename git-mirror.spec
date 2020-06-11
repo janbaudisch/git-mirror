@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 
 Name: git-mirror
-Version: 0.3.2
+Version: 0.4.0
 Release: 1%{?dist}
 Summary: A tool for mirroring a remote git repository to another one
 License: GPL-3.0
