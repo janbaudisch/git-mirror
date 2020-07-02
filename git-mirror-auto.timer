@@ -2,7 +2,8 @@
 Description=Run git-mirror-auto every five minutes
 
 [Timer]
-OnCalendar=*:0/5
+OnBootSec=5min
+OnUnitActiveSec=5min
 
 [Install]
 WantedBy=timers.target
